@@ -1,0 +1,26 @@
+1. Efficiency:
+  1.1 Time Complexity:
+  self.get(): O(1), since all the operations related to the OrderedDict, 
+              including "key not in self", "self.move_to_end", and "self[key]", 
+              are done in constant time.
+  
+  self.put(): O(1), since all the operations related to the OrderedDict,
+              including "self[key]", "self.move_to_end", "len(self)", and "self.popitem",
+              are done in constant time.
+
+  1.2 Space Complexity:
+  O(n) where n is the capacity of the cache, 
+  since space is only used for storing the OrderedDict, who hold no more than n+1 items.
+
+2. Code Design:
+
+The key point to the LRU cache is how to represent "recently used item"
+If we use a linked list to represent the cache, then we can use the head node to represent the recently used item.
+In this way, when we "set"/"get" an item, we insert/move it into the head node.
+
+However, "search"/"insert"/"delete" nodes in a (single) linked list has O(n) time complexity, where n is the capacity.
+To reduce the time complexity, we can use a double linked list to "insert"/"delete" nodes in constant time,
+and use a hash map to "search" a node in constant time (by storing the node as the value of the key).
+
+Also, we can simply use a structure called OrderedDict to realize these functions, which is the final version of codes in my .py file.
+I think using OrderedDict is labor saving, but if you need me to write the double linked list version, I can have a try.
