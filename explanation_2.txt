@@ -1,0 +1,22 @@
+1. Efficiency:
+    1.1 Time Complexity:
+    O(n) where n is the total number of files and directories in the given path.
+
+    1.2 Space Complexity:
+    O(n) where n is the total number of the directories.
+    Imagine a file system only contains n folders, and each folder only contains one folder directly.
+    When we reach the deepest folder, there are n-1 find_files exiting in the call stack, 
+    with n folders in their dirs array.
+
+2. Code Design:
+    A file system is just like a tree. So I use DFS to traverse the tree.
+    In this tree, the leaf node can be a file or an empty directory.
+    
+    In this problem, we focus on finding files ending with ".c".
+    Therefore, when we reach a directory, we will do the following two things:
+    [1] check whether the files it includes meet our requirement (line 35 - 43)
+    [2] do [1] in the directories it includes. (line 45 - 47)
+
+    To realize it, we need a directory as input.
+    However, the name of a file or invalid directory may be input into the find_file function,
+    so I exclude these situations in line 21 - 31

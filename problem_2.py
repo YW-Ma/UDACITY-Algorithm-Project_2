@@ -18,14 +18,15 @@ def find_files(suffix, path):
     Returns:
        a list of paths
     """
-    # base case -- reach a file
+    # in case the input path is a file.
     if isfile(path):
         return
-    
-    # reach a directory
-    try:# make sure the path is existed.
+    # base case -- reach a leaf node (empty folder)
+    try:
         names = listdir(path)
-    except Exception as error:
+        if len(names) == 0:  # empty folder
+            return
+    except Exception as error: # in case the input path is invalid
         print(error)
         return
     
