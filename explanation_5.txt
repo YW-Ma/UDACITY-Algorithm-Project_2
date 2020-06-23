@@ -1,0 +1,17 @@
+1. Efficiency:
+    1.1 Time Complexity:
+        O(n) where n is the number of nodes in the linked list.
+        The append function requires O(1) time, and the user can call it n times to create a blockchain.
+
+    1.2 Space Complexity: 
+        O(k) where k is the total size of the data stored in the blockchain.
+        If n is the number of blocks and m is the data stored in each block.
+        In a block, datetime and hash value always use constant space(O(1)), and data use O(m) space.
+        If there are n blocks, then it need O(n*(m + 1)) ~ O(n*m) space.
+        n*m is also the size of the total data stored in the blockchain.
+  
+2. Code Design:
+    In my code, blocks are linked to each other like:
+    [1st Block] --> [2nd Block] --> ... --> [last block]
+    The previous block has a .next attribute point to the current block,
+    and current block record the hash value of the previous block.

@@ -32,10 +32,8 @@ def is_user_in_group(user, group):
     if user in group.get_users():
         return True
     else:
-        # recursively find users in all subgroup
+        # recursively find the user in all subgroup
         for i in group.get_groups():
-            if i is None:
-                return False 
             if is_user_in_group(user, i):
                 return True
     # cannot find

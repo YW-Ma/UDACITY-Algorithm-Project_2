@@ -1,0 +1,18 @@
+1. Efficiency:
+    1.1 Time Complexity:
+        
+        The relationship of groups and users can be represented as a tree,
+        and finding a user is just like traverse a tree.
+        In my code, I use the depth-first search to do it.
+
+        So, the time complexity is O(b^d) with branching factor b searched to depth d.
+        In this problem, branching factor b is how many sub-groups or users can be added in a group,
+        and depth d is the longest path from the root group to the user.
+
+    1.2 Space Complexity: O(bd), the definition of b and d is similar to the time complexity.
+  
+2. Code Design:
+    The base case of the recursion is "find out the user"
+    We will recursively find the user in all sub-groups
+    If all sub-groups of the root group have been searched and the target cannot be found, it will return False.
+    If a sub-group of the current group found the target, it will return True.

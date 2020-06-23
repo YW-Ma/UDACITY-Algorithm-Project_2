@@ -1,0 +1,16 @@
+1. Efficiency:
+    1.1 Time Complexity:
+    [to_set()] O(n) where n is the length of the linked list,
+                it iterates all nodes in the lists, each loop requires O(1) time.
+    [intersection()] O(m+n) where m and n are the size of two sets of union operation.
+    [intersection()] O(min(m,n)) where m and n are the size of two sets of intersection operation.
+                NOTICE: The set.intersection()/set.union() functions will iterate over the hash list, so it require O(1) time for each element in the set.
+
+    1.2 Space Complexity: 
+        Auxiliary Space: two sets requrie O(n+m) space where n and m are the unique characters in the two lists.
+        The program also need O(k) space to store the input lists, where k is the total number of elements in two input linked lists.
+  
+2. Code Design:
+    First step is to use the set.add() function to remove the duplicate elements in the linked list.
+    Second step is use set.union() and set.intersection() fucntions to calculate the result we need.
+    Thre step is convert the result into a linked list to return.
