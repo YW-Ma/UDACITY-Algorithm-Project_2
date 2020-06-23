@@ -1,0 +1,40 @@
+1. Efficiency:
+    1.1 Time Complexity:
+    huffman_tree(): O(nlogn) where n is the number of unique characters in the data. [not the length of it]
+                    We use a heap to store the frequency and node of the tree,
+                    so each iteration require O(logn) time to find out the nodes with lowest frequency.
+                    There are n characters, so there are n iterations.
+                    
+    huffman_encoding(): O(n) where n is the length of the data
+                        We iterate through the data with n characters,
+                        for each character, we look up a dictionary to find its huffman code, which require O(1) time.
+
+    huffman_decoding(): O(nlogm)
+                        There are n codes in the encoded data.
+                        For each encoded code, we traverse the huffman tree to decode it, 
+                        which take O(logm) where m is the number of nodes in the tree.                 
+    
+    1.2 Space Complexity: 
+        [1]Use O(m) auxiliary space where m is the number of unique characters in the data.
+           We store a tree with no more than (2*m) nodes and a huffman code dictionary with m items.
+
+        [2]Use O(n) space for storing input data and output data, where n is the number of characters in the data.
+    
+  
+2. Code Design:
+2.1 [Huffman Tree]:
+    Min-heap is introduced to reduce time Complexity.
+    I use functions from heapq library, such as heapify, heappop, heappush.
+    
+2.2 [Node]
+    To use the huffman tree to decode,
+    We need to distinguish the leaf node from non-leaf node.
+    To realize it, all leaf "node" is List, not Node class.
+
+    The Node has three attribute:
+    [frequency], [id], and [node]
+    There is an [id] because frequency of many characters may be similar,
+    in that case, heapq.push() function will try to compare the second attribute of element.
+    Without [id], heapq.push() will try to compare Node element, which doesn't support "<=" operation.
+    Therefore, [id] is introduced to make sure every element can be pushed into the heap properly.
+    
