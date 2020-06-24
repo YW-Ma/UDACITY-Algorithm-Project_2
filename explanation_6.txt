@@ -2,7 +2,7 @@
     1.1 Time Complexity:
     [to_set()] O(n) where n is the length of the linked list,
                 it iterates all nodes in the lists, each loop requires O(1) time.
-    [intersection()] O(m+n) where m and n are the size of two sets of union operation.
+    [union()] O(m+n) where m and n are the size of two sets of union operation.
     [intersection()] O(min(m,n)) where m and n are the size of two sets of intersection operation.
                 NOTICE: The set.intersection()/set.union() functions will iterate over the hash list, so it require O(1) time for each element in the set.
 

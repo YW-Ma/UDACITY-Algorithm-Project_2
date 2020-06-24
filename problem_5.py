@@ -12,13 +12,16 @@ class Block:
     def __init__(self, timestamp, data, previous_hash):
         self.timestamp = timestamp
         self.data = data
-        self.hash = self.calc_hash()
         self.previous_hash = previous_hash
+        self.hash = self.calc_hash()
         self.next = None
     
     def calc_hash(self):
+        # encode stamp, data, previous_hash, and data all together.
+        # [if only encode data, two same data will have same hash value]
         sha = hashlib.sha256()
-        sha.update(self.data.encode('utf-8'))
+        content = str(self.timestamp) + str(self.data) + str(self.previous_hash)
+        sha.update(content.encode('utf-8'))
         return sha.hexdigest()
     
     def __repr__(self):
@@ -36,6 +39,8 @@ class BlockChain:
     NOTICE: The direction of arrow is different from the one given in the intro of the problem
     """
     def __init__(self):
+        # We keep the reference of tail of the linked list,
+        # so as to achieve O(1) append time.
         self.head = None
         self.tail = None
     
@@ -88,20 +93,21 @@ if __name__ == "__main__":
 
     print(chain_1.toList())
     """
-    Timestamp: 2020-06-23 15:36:51.502838,
+    [[
+    Timestamp: 2020-06-24 10:57:59.864151,
     Data: 1. Lemon,
-    Hash: aa69170f0d8783ab73eca291135c4196bb699587f14f1f2df41f55017325ef99,
+    Hash: f82150e0258eaa3356524b5111cb973d6ae57c894b1819ee1df88c8cb5709f70,
     Prev_hash: 0,
     ], [
-    Timestamp: 2020-06-23 15:36:51.502838,
+    Timestamp: 2020-06-24 10:57:59.865148,
     Data: 2. Banana,
-    Hash: 6565f13ac799b518daa076abb6492b5bcdc2425c9d294c1fca1cf965508578ca,
-    Prev_hash: aa69170f0d8783ab73eca291135c4196bb699587f14f1f2df41f55017325ef99,
+    Hash: ffa30c716f8fd3c1d1c8854aa75d2087f441088104d6673275de81a71fdef1bd,
+    Prev_hash: f82150e0258eaa3356524b5111cb973d6ae57c894b1819ee1df88c8cb5709f70,
     ], [
-    Timestamp: 2020-06-23 15:36:51.502838,
+    Timestamp: 2020-06-24 10:57:59.865148,
     Data: 3. Lychee,
-    Hash: 843b315517a43a11ff4aebde38d5da817076dedbef2a1cbe7ef0a2c9ac4a5ea7,
-    Prev_hash: 6565f13ac799b518daa076abb6492b5bcdc2425c9d294c1fca1cf965508578ca,
+    Hash: 37a0b20f5bdff36520d850a606c407b136492fd507a92faa71c7410bf8c32fca,
+    Prev_hash: ffa30c716f8fd3c1d1c8854aa75d2087f441088104d6673275de81a71fdef1bd,
     ]]
     """
 

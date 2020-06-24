@@ -25,7 +25,8 @@ class LRU_Cache(OrderedDict):
         if len(self) > self.capacity:
             self.popitem(last = False)
 
-# TEST
+# TEST - 1
+print("test case 1")
 our_cache = LRU_Cache(5)
 
 our_cache.set(1, 1)
@@ -51,3 +52,25 @@ print(our_cache.get(2))      # returns 2
 #status: [1,5,6,2]
 print(our_cache.get(5))      # returns 5
 #status: [1,6,2,5]
+
+# TEST - 2
+print("test case 2")
+our_cache = LRU_Cache(0)
+
+our_cache.set(1, 1)
+our_cache.set(2, 2)
+#status: []
+
+print(our_cache.get(1))       # returns -1
+#status: []
+
+# TEST - 3
+print("test case 3")
+our_cache = LRU_Cache(1)
+
+our_cache.set(1, 1)
+our_cache.set(2, 2)
+#status: [2]
+
+print(our_cache.get(2))       # returns 2
+#status: [2]

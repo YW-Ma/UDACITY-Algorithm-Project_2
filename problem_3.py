@@ -20,6 +20,8 @@ class Node(object):
             Huffman_code[self.right[2][0]] = code+"1" # [freq, id, [symbol]], right[2][0] --> symbol
     
 def huffman_tree(data):
+    if data is None or data is "":
+        return data
     # calculating the frequency of each characters
     frequency = {}
     for character in data:
@@ -51,12 +53,16 @@ def huffman_tree(data):
 
 def huffman_encoding(data):
     # calculating the frequency of each characters
+    if data is None or data is "":
+        return data
     encoded = ""
     for character in data:
         encoded = encoded + Huffman_code[character]
     return encoded
 
 def huffman_decoding(data,tree):
+    if data is None or data is "":
+        return data
     decoded = ""
     current = tree
     for bit in data:
@@ -73,6 +79,7 @@ def huffman_decoding(data,tree):
     
 if __name__ == "__main__":
     # Test 1: normal
+    print("Test 1")
     Huffman_code = {}
     a_great_sentence = "The bird is the word"
     tree = huffman_tree(a_great_sentence)
@@ -94,6 +101,7 @@ if __name__ == "__main__":
     # The bird is the word
     
     # Test 2: contain only one characters
+    print("Test 2")
     Huffman_code = {}
     a_great_sentence = "AAAAA"
     tree = huffman_tree(a_great_sentence)
@@ -114,7 +122,8 @@ if __name__ == "__main__":
     # 54
     # AAAAA
     
-    # Test 1: all characters only appear once
+    # Test 3: all characters only appear once
+    print("Test 3")
     Huffman_code = {}
     a_great_sentence = "ABCDEF0123456"
     tree = huffman_tree(a_great_sentence)
@@ -134,3 +143,48 @@ if __name__ == "__main__":
     print ("The content of the encoded data is: {}\n".format(decoded_data))
     # 62
     # ABCDEF0123456
+
+    # Test 4: empty string
+    print("Test 4")
+    Huffman_code = {}
+    a_great_sentence = ""
+    tree = huffman_tree(a_great_sentence)
+    print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
+    print ("The content of the data is: {}\n".format(a_great_sentence))
+    # 49
+    # ""
+
+    encoded_data = huffman_encoding(a_great_sentence)
+    # print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
+    # Empty string cannot use int() with base 2
+    print ("The content of the encoded data is: {}\n".format(encoded_data))
+    # ""
+
+    decoded_data = huffman_decoding(encoded_data, tree)
+    print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
+    print ("The content of the encoded data is: {}\n".format(decoded_data))
+    # 49
+    # ""
+
+
+    # Test 5: None
+    print("Test 5")
+    Huffman_code = {}
+    a_great_sentence = None
+    tree = huffman_tree(a_great_sentence)
+    print ("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
+    print ("The content of the data is: {}\n".format(a_great_sentence))
+    # 16
+    # None
+
+    encoded_data = huffman_encoding(a_great_sentence)
+    # print ("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
+    # None cannot use int() with base 2
+    print ("The content of the encoded data is: {}\n".format(encoded_data))
+    # None
+
+    decoded_data = huffman_decoding(encoded_data, tree)
+    print ("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
+    print ("The content of the encoded data is: {}\n".format(decoded_data))
+    # 16
+    # None
